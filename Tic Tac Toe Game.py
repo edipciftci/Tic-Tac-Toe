@@ -39,6 +39,12 @@ def start():
             
             pass
         
+        def count_moves():
+            
+            # Counts the played moves to help determining the turns.
+            
+            pass
+        
         def modify_table(num: int):
             
             # Function to implement the necessary adjustments on the table array based on the last move.
@@ -51,28 +57,39 @@ def start():
             
             pass
         
+        def click(bttn: tk.Button, num: int):
+            
+            # Makes a move when a button is clicked, if it is legal.
+            # Uses necessary functions to adjust the game logic and GUI based on the move.
+            # Checks if the game has ended.
+            
+            if(table[num] == " "):
+                text_change(bttn)
+                modify_table(num)
+                stop_func()        
+        
         def button_creation():
             
             # Function to create the cells.
             
             top_left = tk.Button(frame, bg=bg_color, text=table[0],
-                                 command=lambda: [text_change(top_left), modify_table(0), stop_func()])
+                                 command=lambda: click(top_left, 0))
             top_center = tk.Button(frame, bg=bg_color, text=table[1],
-                                   command=lambda: [text_change(top_center), modify_table(1), stop_func()])
+                                   command=lambda: click(top_center, 1))
             top_right = tk.Button(frame, bg=bg_color, text=table[2],
-                                  command=lambda: [text_change(top_right), modify_table(2), stop_func()])
+                                  command=lambda: click(top_right, 2))
             mid_left = tk.Button(frame, bg=bg_color, text=table[3],
-                                 command=lambda: [text_change(mid_left), modify_table(3), stop_func()])
+                                 command=lambda: click(mid_left, 3),)
             mid_center = tk.Button(frame, bg=bg_color, text=table[4],
-                                   command=lambda: [text_change(mid_center), modify_table(4), stop_func()])
+                                   command=lambda: click(mid_center, 4))
             mid_right = tk.Button(frame, bg=bg_color, text=table[5],
-                                  command=lambda: [text_change(mid_right), modify_table(5), stop_func()])
+                                  command=lambda: click(mid_right, 5))
             bottom_left = tk.Button(frame, bg=bg_color, text=table[6],
-                                    command=lambda: [text_change(bottom_left), modify_table(6), stop_func()])
+                                    command=lambda: click(bottom_left, 6))
             bottom_center = tk.Button(frame, bg=bg_color, text=table[7],
-                                      command=lambda: [text_change(bottom_center), modify_table(7), stop_func()])
+                                      command=lambda: click(bottom_center, 7))
             bottom_right = tk.Button(frame, bg=bg_color, text=table[8],
-                                     command=lambda: [text_change(bottom_right), modify_table(8), stop_func()])
+                                     command=lambda: click(bottom_right, 8))
 
             buttons = [top_left, top_center, top_right,
                        mid_left, mid_center, mid_right,
