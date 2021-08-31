@@ -43,13 +43,24 @@ def start():
             
             # Counts the played moves to help determining the turns.
             
-            pass
+            count = 0
+            for string in table:
+                if string == " ":
+                    pass
+                else:
+                    count += 1
+            return int(count)
         
         def modify_table(num: int):
             
             # Function to implement the necessary adjustments on the table array based on the last move.
+            # Uses count_moves() to determine the turn.
             
-            pass
+            if count_moves() % 2:
+                table[num] = "O"
+            else:
+                table[num] = "X"
+            print(table)
         
         def text_change(bttn: tk.Button):
             
