@@ -66,7 +66,10 @@ def start():
             
             # Function to implement the necessary adjustments on the last played cell based on the last move.
             
-            pass
+            if count_moves() % 2:
+                bttn.configure(text="O")
+            else:
+                bttn.configure(text="X")
         
         def click(bttn: tk.Button, num: int):
             
