@@ -33,11 +33,35 @@ def start():
                  " ", " ", " ",
                  " ", " ", " "]
         
+        def check_full_table():
+            
+            # Function to determine if the table is full.
+            # This function will only be called after check_winner() returns false.
+            # Therefore, if it returns true that means the game has ended in a draw.
+            
+            for cell in table:
+                if cell == " ":
+                    return False
+            return True
+        
+        def check_winner():
+            
+            # Function to determine if any side has won.
+            # Returns 'X' or 'O' or 'None'
+            
+            pass
+        
         def stop_func():
             
             # Function to end the game if one side wins and/or there is no logical moves left.
             
-            pass
+            winner = check_winner()
+            if winner is not None:
+                print(winner + "is the winner!")
+            elif check_full_table():
+                print("There is a tie!")
+                
+            # TODO: Endgame widget
         
         def count_moves():
             
