@@ -68,11 +68,24 @@ def start():
                         continue
                     elif table[i] == table[i + 3] == table[i - 3]:
                         return table[i]
+                    
+            def check_diagonal():
+                
+                # Determines if there is a winner based on the diagonals.
+                
+                if table[0] != " ":
+                    if table[0] == table[4] == table[8]:
+                        return table[0]
+                if table[2] != " ":
+                    if table[2] == table[4] == table[6]:
+                        return table[2]
             
             if check_row() is not None:
                 return check_row()
             elif check_col() is not None:
                 return check_col()
+            elif check_diagonal() is not None:
+                return check_diagonal()
         
         def stop_func():
             
