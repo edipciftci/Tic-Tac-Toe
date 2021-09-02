@@ -50,15 +50,29 @@ def start():
             # Returns 'X' or 'O' or 'None'
             
             def check_row():
+                
+                # Determines if there is a winner based on the rows.
+                
                 for i in range(0, 9, 3):
                     if table[i] == " ":
                         continue
                     elif table[i] == table[i + 1] == table[i + 2]:
                         return table[i]
+                    
+            def check_col():
+                
+                # Determines if there is a winner based on the columns.
+                
+                for i in range(0, 3):
+                    if table[i] == " ":
+                        continue
+                    elif table[i] == table[i + 3] == table[i - 3]:
+                        return table[i]
             
             if check_row() is not None:
                 return check_row()
-            
+            elif check_col() is not None:
+                return check_col()
         
         def stop_func():
             
