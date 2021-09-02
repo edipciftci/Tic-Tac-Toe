@@ -1,12 +1,12 @@
 import tkinter as tk
-from tkinter import font as tkFont
+from tkinter import Frame, font as tkFont
 import json
 
 def start():
     
-    # This function starts the game
+    # Function to start the game.
     
-    # Game window initiation 
+    # Game window initiation
     
     root = tk.Tk()
     root.geometry("600x600")
@@ -20,6 +20,36 @@ def start():
     bg_color = theme[2]["bg_color"]
     frame_color = theme[2]["frame_color"]
     fg_color = theme[2]["fg_color"]
+    
+    def endgame_widget(result):
+        
+        # Function to show the widget at the end of each game.
+        # Takes 1 argument, 'result': Result of the game.
+        # Shows the result and has 2 buttons; 'Restart' and 'Quit'.
+    
+        # Endgame widget initiation
+        
+        widget = tk.Tk()
+        widget.geometry("300x100")
+        widget.resizable(False, False)
+        
+        if result == "Tie":
+            res_text = "It is a tie!"
+        else:
+            res_text = result + " is the winner!"
+            
+        frame = tk.LabelFrame(widget, bg=frame_color, fg=fg_color, text=res_text, labelanchor="n")
+        frame.place(relheight=1, relwidth=1)
+        
+        restart = tk.Button(frame, bg=bg_color, fg=fg_color, text="Restart",
+                            command=lambda: [widget.destroy(), game()])
+        restart.pack()
+        
+        qt = tk.Button(frame, bg=bg_color, fg=fg_color, text="Quit",
+                       command=lambda: [widget.destroy(), root.destroy()])
+        qt.pack()
+        
+        widget.mainloop()
 
     def game():
         
@@ -47,7 +77,7 @@ def start():
         def check_winner():
             
             # Function to determine if any side has won.
-            # Returns 'X' or 'O' or 'None'
+            # Returns 'X' or 'O' or 'None'.
             
             def check_row():
                 
@@ -94,10 +124,10 @@ def start():
             winner = check_winner()
             if winner is not None:
                 print(winner + " is the winner!")
+                endgame_widget(winner)
             elif check_full_table():
                 print("There is a tie!")
-                
-            # TODO: Endgame widget
+                endgame_widget("Tie")
         
         def count_moves():
             
@@ -114,6 +144,7 @@ def start():
         def modify_table(num: int):
             
             # Function to implement the necessary adjustments on the table array based on the last move.
+            # Takes 1 argument, 'num': Position of the move on the table.
             # Uses count_moves() to determine the turn.
             
             if count_moves() % 2:
@@ -125,6 +156,7 @@ def start():
         def text_change(bttn: tk.Button):
             
             # Function to implement the necessary adjustments on the last played cell based on the last move.
+            # Takes 1 argument, 'bttn': The button that has been clicked.
             
             if count_moves() % 2:
                 bttn.configure(text="O")
@@ -133,7 +165,9 @@ def start():
         
         def click(bttn: tk.Button, num: int):
             
-            # Makes a move when a button is clicked, if it is legal.
+            # Function to make a move when a button is clicked, if it is legal.
+            # Takes 2 arguments, 'bttn': The button that has been clicked.
+            #                    'num': Position of the move on the table.
             # Uses necessary functions to adjust the game logic and GUI based on the move.
             # Checks if the game has ended.
             
