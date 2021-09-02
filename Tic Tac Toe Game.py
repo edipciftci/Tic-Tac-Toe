@@ -49,7 +49,16 @@ def start():
             # Function to determine if any side has won.
             # Returns 'X' or 'O' or 'None'
             
-            pass
+            def check_row():
+                for i in range(0, 9, 3):
+                    if table[i] == " ":
+                        continue
+                    elif table[i] == table[i + 1] == table[i + 2]:
+                        return table[i]
+            
+            if check_row() is not None:
+                return check_row()
+            
         
         def stop_func():
             
@@ -57,7 +66,7 @@ def start():
             
             winner = check_winner()
             if winner is not None:
-                print(winner + "is the winner!")
+                print(winner + " is the winner!")
             elif check_full_table():
                 print("There is a tie!")
                 
