@@ -63,6 +63,17 @@ def start():
                  " ", " ", " ",
                  " ", " ", " "]
         
+        def menubar_creation():
+            
+            menubar = tk.Menu(root, bg=bg_color, fg=fg_color)
+            dropdown = tk.Menu(menubar, tearoff=0)
+            dropdown.add_command(label="Theme")
+            dropdown.add_command(label="Restart", command=lambda: [root.destroy(), start()])
+            dropdown.add_command(label="Quit", command=root.destroy)
+            menubar.add_cascade(label="Menu", menu=dropdown)
+            
+            root.config(menu=menubar)
+        
         def check_full_table():
             
             # Function to determine if the table is full.
@@ -226,6 +237,7 @@ def start():
         frame.place(relwidth=1, relheight=1)
         
         button_creation()
+        menubar_creation()
     
     game()
     root.mainloop()
