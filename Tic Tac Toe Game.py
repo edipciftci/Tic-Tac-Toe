@@ -17,10 +17,11 @@ def start():
     with open('themes.json', 'r') as f:
         theme = json.load(f)
     
+    num_of_themes = len(theme)
     bg_color = theme[2]["bg_color"]
     frame_color = theme[2]["frame_color"]
     fg_color = theme[2]["fg_color"]
-    
+            
     def endgame_widget(result):
         
         # Function to show the widget at the end of each game.
@@ -63,11 +64,39 @@ def start():
                  " ", " ", " ",
                  " ", " ", " "]
         
+        default_font = tkFont.Font(family="Helvetica", size=50, weight="bold") 
+        
         def menubar_creation():
+            
+            # Function to create a menubar
+            
+            def theme_selection():
+                
+                width = 300
+                height = num_of_themes * 100
+            
+                selector = tk.Tk()
+                selector.maxsize(width, height)
+                selector.minsize(width, height)
+                selector.resizable(False, False)
+                
+                theme_frame = tk.Frame(selector, bg=frame_color)
+                theme_frame.place(relheight=1, relwidth=1)
+                
+                theme_buttons = []
+                theme_num = 0
+                
+                for thm in theme:
+                    button_text = "Theme " + str(theme_num + 1)
+                    new_button = tk.Button(theme_frame, bg=thm["bg_color"], fg=thm["fg_color"], text=button_text)
+                    theme_buttons.append(new_button)
+                    theme_buttons[theme_num].config(font=default_font)
+                    theme_buttons[theme_num].place(x=0, y=100*theme_num, height=100, width=300)
+                    theme_num += 1                    
             
             menubar = tk.Menu(root, bg=bg_color, fg=fg_color)
             dropdown = tk.Menu(menubar, tearoff=0)
-            dropdown.add_command(label="Theme")
+            dropdown.add_command(label="Theme", command=lambda: [theme_selection()])
             dropdown.add_command(label="Restart", command=lambda: [root.destroy(), start()])
             dropdown.add_command(label="Quit", command=root.destroy)
             menubar.add_cascade(label="Menu", menu=dropdown)
@@ -214,15 +243,13 @@ def start():
                        mid_left, mid_center, mid_right,
                        bottom_left, bottom_center, bottom_right]
             
-            a = 0.01
-            default_font = tkFont.Font(family="Helvetica", size=50, weight="bold") 
-            
             for btn in buttons:
                 btn.config(font=default_font)
                 btn.configure(fg=fg_color)
                 
             # Cell placement
-
+            
+            a = 0.01
             top_left.place(relx=2 * a, rely=2 * a, relwidth=30 * a, relheight=30 * a)
             top_center.place(relx=35 * a, rely=2 * a, relwidth=30 * a, relheight=30 * a)
             top_right.place(relx=68 * a, rely=2 * a, relwidth=30 * a, relheight=30 * a)
