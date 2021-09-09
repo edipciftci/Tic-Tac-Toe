@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import Frame, font as tkFont
+from tkinter import Frame, font as tkFont, colorchooser
 import json
 
 default = 2
@@ -87,6 +87,34 @@ def start(color: int):
                     root.destroy()
                     start(num)
                     
+                    
+                def create_new_theme():
+                    
+                    # Function to create a new theme.
+                    # Uses the add_to_json function to append the newly created theme to the json file.
+                    
+                    def add_to_json(new_data):
+                        
+                        with open('themes.json', 'r+') as f:
+                            theme = json.load(f)
+                            theme.append(new_data)
+                            f.seek(0)
+                            json.dump(theme, f, indent=4)
+                            
+                    # Color picking for the new theme
+                    
+                    new_bg = colorchooser.askcolor(title="Background color")[1]
+                    new_fg = colorchooser.askcolor(title="Foreground color")[1]
+                    new_frame = colorchooser.askcolor(title="Frame color")[1]
+                    
+                    new_thm = {
+                        "bg_color" : new_bg,
+                        "frame_color" : new_frame,
+                        "fg_color" : new_fg
+                    }
+                    
+                    add_to_json(new_thm)
+                                        
                 # Theme selection widget initiation
 
                 width = 300
@@ -97,11 +125,11 @@ def start(color: int):
                 selector.minsize(width, height)
                 selector.resizable(False, False)
                 
-                # Create new theme option
+                # Create new theme menu
                 
                 create = tk.Menu(selector, bg=bg_color, fg=fg_color)
                 new_theme = tk.Menu(create, tearoff=0)
-                new_theme.add_command(label="Create", command=lambda: [print("New theme created")])
+                new_theme.add_command(label="Create", command=lambda: [selector.destroy(), create_new_theme()])
                 create.add_cascade(label="New Theme", menu=dropdown)
                 
                 selector.config(menu=create)
