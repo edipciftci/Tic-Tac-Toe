@@ -96,6 +96,15 @@ def start(color: int):
                 selector.maxsize(width, height)
                 selector.minsize(width, height)
                 selector.resizable(False, False)
+                
+                # Create new theme option
+                
+                create = tk.Menu(selector, bg=bg_color, fg=fg_color)
+                new_theme = tk.Menu(create, tearoff=0)
+                new_theme.add_command(label="Create", command=lambda: [print("New theme created")])
+                create.add_cascade(label="New Theme", menu=dropdown)
+                
+                selector.config(menu=create)
 
                 theme_frame = tk.Frame(selector, bg=frame_color)
                 theme_frame.place(relheight=1, relwidth=1)
