@@ -92,6 +92,7 @@ def start(color: int):
                     
                     # Function to create a new theme.
                     # Uses the add_to_json function to append the newly created theme to the json file.
+                    # Uses the colorchooser of tkinter library.
                     
                     def add_to_json(new_data):
                         
@@ -114,6 +115,44 @@ def start(color: int):
                     }
                     
                     add_to_json(new_thm)
+                
+                
+                def delete_theme_widget():
+                    
+                    # Function to create a delete theme widget.
+                    # Deleting the, currently 3, default themes is not possible.
+                    
+                    num_of_def_themes = 3
+                    dw_height = height-100 * num_of_def_themes
+                    
+                    del_widget = tk.Tk()
+                    del_widget.maxsize(width, dw_height)
+                    del_widget.minsize(width, dw_height)
+                    del_widget.resizable(False, False)
+                    
+                    dw_frame = tk.Frame(del_widget, bg=frame_color)
+                    dw_frame.place(relheight=1, relwidth=1)
+
+                    dw_theme_buttons = []
+                    dw_theme_num = 0
+
+                    # Creating theme buttons to choose from.
+
+                    for thm in theme:
+                        if dw_theme_num < num_of_def_themes:
+                            dw_theme_num += 1
+                        else:
+                            button_text = "Theme " + str(dw_theme_num + 1)
+                            new_button = tk.Button(
+                                dw_frame, bg=thm["bg_color"], fg=thm["fg_color"], text=button_text)
+                            dw_theme_buttons.append(new_button)
+                            dw_theme_buttons[dw_theme_num-num_of_def_themes].config(font=default_font)
+                            dw_theme_buttons[dw_theme_num-num_of_def_themes].place(
+                                x=0, y=100*(dw_theme_num-num_of_def_themes), height=100, width=300)
+                            dw_theme_num += 1
+
+                    for i in range(0, len(dw_theme_buttons)):
+                        dw_theme_buttons[i]["command"] = lambda i=i: print(i+num_of_def_themes+1)
                                         
                 # Theme selection widget initiation
 
@@ -129,8 +168,9 @@ def start(color: int):
                 
                 create = tk.Menu(selector, bg=bg_color, fg=fg_color)
                 new_theme = tk.Menu(create, tearoff=0)
-                new_theme.add_command(label="Create", command=lambda: [selector.destroy(), create_new_theme()])
-                create.add_cascade(label="New Theme", menu=dropdown)
+                new_theme.add_command(label="New Theme", command=lambda: [selector.destroy(), create_new_theme()])
+                new_theme.add_command(label="Delete Theme", command=lambda: [selector.destroy(), delete_theme_widget()])
+                create.add_cascade(label="Options", menu=dropdown)
                 
                 selector.config(menu=create)
 
