@@ -135,6 +135,16 @@ def start(color: int):
                 
                 def delete_theme_widget():
                     
+                    def delete_theme(num):
+                        
+                        # Function to delete the chosen theme.
+                        # Takes 1 argument, 'num': Number of the theme to be deleted
+                        
+                        with open('themes.json', 'r+') as f:
+                            theme = json.load(f)
+                            theme.pop(num)
+                            theme = json.dump(theme, f)                       
+                            
                     # Function to create a delete theme widget.
                     # Deleting the, currently 3, default themes is not possible.
                     
@@ -168,7 +178,7 @@ def start(color: int):
                             dw_theme_num += 1
 
                     for i in range(0, len(dw_theme_buttons)):
-                        dw_theme_buttons[i]["command"] = lambda i=i: print(i+num_of_def_themes+1)
+                        dw_theme_buttons[i]["command"] = lambda i=i: delete_theme(i+num_of_def_themes)
                                         
                 # Theme selection widget initiation
 
