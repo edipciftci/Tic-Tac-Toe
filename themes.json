@@ -1,17 +1,22 @@
 [
     {
-        "bg_color" : "#dbb436",
-        "frame_color" : "#9b7700",
-        "fg_color" : "#4c3a00"
+        "bg_color": "#dbb436",
+        "frame_color": "#9b7700",
+        "fg_color": "#4c3a00"
     },
     {
-        "bg_color" : "#efcefa",
-        "frame_color" : "#a88fac",
-        "fg_color" : "#5d4e60"
+        "bg_color": "#efcefa",
+        "frame_color": "#a88fac",
+        "fg_color": "#5d4e60"
     },
     {
-        "bg_color" : "#d7ceb2",
-        "frame_color" : "#66635b",
-        "fg_color" : "#761010"
+        "bg_color": "#d7ceb2",
+        "frame_color": "#66635b",
+        "fg_color": "#761010"
+    },
+    {
+        "bg_color": "#ffc600",
+        "frame_color": "#d9ecd9",
+        "fg_color": "#642e83"
     }
 ]
