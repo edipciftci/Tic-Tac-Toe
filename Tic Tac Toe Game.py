@@ -140,9 +140,10 @@ def start(color: int):
                         # Function to delete the chosen theme.
                         # Takes 1 argument, 'num': Number of the theme to be deleted
                         
-                        with open('themes.json', 'r+') as f:
+                        with open('themes.json', 'r') as f:
                             theme = json.load(f)
                             theme.pop(num)
+                        with open('themes.json', 'w') as f:
                             theme = json.dump(theme, f)                       
                             
                     # Function to create a delete theme widget.
