@@ -2,7 +2,10 @@ import tkinter as tk
 from tkinter import Frame, font as tkFont, colorchooser, messagebox
 import json
 
-default = 2
+with open('settings.json', 'r') as s:
+    settings = json.load(s)
+
+default = settings[0]["Default_theme"]
 
 def start(color: int):
 
