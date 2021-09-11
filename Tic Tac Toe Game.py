@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import Frame, font as tkFont, colorchooser
+from tkinter import Frame, font as tkFont, colorchooser, messagebox
 import json
 
 default = 2
@@ -117,6 +117,22 @@ def start(color: int):
                     add_to_json(new_thm)
                 
                 
+                def check_deletable():
+                    
+                    # Fucntion to check if there are any deletable themes.
+                    # A deletable theme is one that has been previously created 
+                    #                          by the use and not a default one.
+                    # If there are any deletable themes, delete theme widget opens.
+                    # If not, the user is alerted that there are no deletable themes.
+                    
+                    num_of_def_themes = 3
+                    
+                    if num_of_themes > num_of_def_themes:
+                        delete_theme_widget()
+                    else:
+                        messagebox.showinfo("No Deletable Themes", "There are only default themes. You can only delete user created themes.")
+                
+                
                 def delete_theme_widget():
                     
                     # Function to create a delete theme widget.
@@ -169,7 +185,7 @@ def start(color: int):
                 create = tk.Menu(selector, bg=bg_color, fg=fg_color)
                 new_theme = tk.Menu(create, tearoff=0)
                 new_theme.add_command(label="New Theme", command=lambda: [selector.destroy(), create_new_theme()])
-                new_theme.add_command(label="Delete Theme", command=lambda: [selector.destroy(), delete_theme_widget()])
+                new_theme.add_command(label="Delete Theme", command=lambda: [selector.destroy(), check_deletable()])
                 create.add_cascade(label="Options", menu=dropdown)
                 
                 selector.config(menu=create)
