@@ -179,7 +179,7 @@ def start(color: int):
                             dw_theme_num += 1
 
                     for i in range(0, len(dw_theme_buttons)):
-                        dw_theme_buttons[i]["command"] = lambda i=i: delete_theme(i+num_of_def_themes)
+                        dw_theme_buttons[i]["command"] = lambda i=i: [delete_theme(i+num_of_def_themes), del_widget.destroy(), root.destroy(), start(default)]
                                         
                 # Theme selection widget initiation
 
