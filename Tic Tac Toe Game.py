@@ -85,6 +85,13 @@ def start(color: int):
                     
                     # Function to change the theme.
                     # Takes 1 argument, 'num': Newly selected theme number.
+                    
+                    with open('settings.json', 'r+') as s:
+                        settings = json.load(s)
+                        settings.append({"Default_theme": num})
+                        settings.pop(0)
+                    with open('settings.json', 'w') as s:
+                        settings = json.dump(settings, s, indent=4)   
 
                     selector.destroy()
                     root.destroy()
