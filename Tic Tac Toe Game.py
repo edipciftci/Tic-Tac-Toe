@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import Frame, font as tkFont, colorchooser, messagebox
 import json
 
+# Getting the default theme settings
+
 with open('settings.json', 'r') as s:
     settings = json.load(s)
 
